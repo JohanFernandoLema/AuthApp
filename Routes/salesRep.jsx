@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-router.get('/salesTeam', (req, res) => {
+router.get('/', (req, res) => {
   res.send("You've reached our team")
 })
 
