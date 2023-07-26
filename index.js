@@ -13,13 +13,16 @@
 // })
 
 // SERVER ON EXPRESS
+
+// Importing module
 const express = require('express')
 const app = express()
+
 const PORT = 5000
 
-app.get('/', (req, res) => {
-  res.send('We are live :)')
-})
+const salesTeam = require('./Routes/salesRep.jsx')
+
+app.use('/salesTeam', salesTeam)
 
 app.listen(PORT, () => {
   console.log(`We are successfully running on port ${PORT}`)
