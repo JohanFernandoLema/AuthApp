@@ -15,12 +15,18 @@
 // SERVER ON EXPRESS
 
 // Importing module
-const express = require('express')
+import { express } from 'express'
+import mongoose from 'mongoose'
+
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
 const app = express()
 
 const PORT = 5000
 
-const salesTeam = require('./Routes/salesRep.jsx')
+import salesTeam from './Routes/salesRep.jsx'
 
 app.use('/salesTeam', salesTeam)
 
