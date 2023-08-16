@@ -1,11 +1,12 @@
 // const mongoose = require('mongoose')
-import mongoose from 'mongoose'
+const mongoose = require('mongoose')
 const repsSchema = new mongoose.Schema({
   name: String,
-  location: { type: String, required: true },
+  location: String,
   email: String,
-  languages: Array,
+  languages: String,
   phone: Number,
 })
 
-export default mongoose.model('representatives', repsSchema)
+const repsInfo = mongoose.model('reps', repsSchema)
+module.exports = repsInfo

@@ -2,7 +2,9 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
+
 const authRoute = require('./routes/auth.js')
+const salesReps = require('./routes/salesReps.js')
 
 dotenv.config()
 const app = express()
@@ -19,7 +21,10 @@ const cloudDB = async () => {
 }
 
 // middleware
+app.use(express.json())
+
 app.use('/auth', authRoute)
+app.use('/salesRepresentatives', salesReps)
 
 app.listen(PORT, () => {
   cloudDB('')
