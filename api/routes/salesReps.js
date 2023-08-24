@@ -13,7 +13,7 @@ router.post('/', async (req, res) => {
   }
 })
 
-//UPDATE A SALES REP
+// UPDATE A SALES REP
 router.put('/:id', async (req, res) => {
   try {
     const updatedRep = await Representative.findByIdAndUpdate(
@@ -24,6 +24,19 @@ router.put('/:id', async (req, res) => {
       { new: true }
     )
     res.status(200).json(updatedRep)
+  } catch (err) {
+    res.status(500).json(err)
+  }
+})
+
+// DELETE SALES REP
+
+router.delete('/:id', async (req, res) => {
+  try {
+    await Representative.findByIdAndDelete(req.params.id)
+    res
+      .status(200)
+      .json('Representative has been removed out of the corporation')
   } catch (err) {
     res.status(500).json(err)
   }
