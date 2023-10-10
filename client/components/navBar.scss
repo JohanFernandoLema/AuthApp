@@ -1,0 +1,17 @@
+.navBar {
+  background: blue;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 1%;
+}
+ul {
+  display: flex;
+  justify-content: end;
+  font-size: 20px;
+  li {
+    background: white;
+    width: 100px;
+    list-style-type: none;
+  }
+}
