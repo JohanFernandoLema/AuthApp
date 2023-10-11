@@ -4,25 +4,23 @@ const NavBar = () => {
   return (
     <>
       <div className="navBar">
-        <Link to={'/'}>
-          <div>PCI</div>
+        <Link to={'/'} className="removeU">
+          <div className="pciLabel">PCI</div>
         </Link>
         <div className="listLinks">
           <ul>
-            <Link to={'/about'}>
+            <Link to={'/about'} className="removeU">
               <li>About</li>
             </Link>
-            <Link to={'/stores-information'}>
+            <Link to={'/stores-information'} className="removeU">
               <li>Our Stores</li>
             </Link>
-            <Link to={'/contact-us'}>
+            <Link to={'/contact-us'} className="removeU">
               <li>Contact Us</li>
             </Link>
           </ul>
         </div>
-        <div>
-          <button>Log In</button>
-        </div>
+        <button className="logInBtn">Log In</button>
       </div>
     </>
   )
