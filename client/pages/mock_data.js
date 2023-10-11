@@ -1,6 +1,7 @@
 const stores = [
   {
-    locations: 'Jane and Finch',
+    name: 'store-1',
+    location: 'jane-and-finch',
     phone: 4373280008,
     email: 'johan@pluscommunications.ca',
     schedule: [
@@ -14,7 +15,8 @@ const stores = [
     ],
   },
   {
-    locations: 'Dixie Mall',
+    name: 'store-2',
+    location: 'dixie-mall',
     phone: 4373280008,
     email: 'johan@pluscommunications.ca',
     schedule: [
@@ -28,7 +30,8 @@ const stores = [
     ],
   },
   {
-    locations: 'Parkway Mall',
+    name: 'store-3',
+    location: 'parkway-mall',
     phone: 4373280008,
     email: 'johan@pluscommunications.ca',
     schedule: [
@@ -42,7 +45,8 @@ const stores = [
     ],
   },
   {
-    locations: 'Albion Mall',
+    name: 'store-4',
+    location: 'albion-mall',
     phone: 4373280008,
     email: 'johan@pluscommunications.ca',
     schedule: [
