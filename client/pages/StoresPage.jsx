@@ -1,4 +1,9 @@
+import StoresList from '../components/StoresList'
 const StoresPage = () => {
-  return <div>This is the information of the stores</div>
+  return (
+    <div>
+      <StoresList />
+    </div>
+  )
 }
 export default StoresPage

@@ -1,3 +1,4 @@
+import './contact.scss'
 const ContactPage = () => {
   return (
     <div className="formPage">
