@@ -27,6 +27,6 @@ app.use('/auth', authRoute)
 app.use('/salesRepresentatives', salesReps)
 
 app.listen(PORT, () => {
-  cloudDB('')
+  cloudDB()
   console.log(`App running successfully on port: ${PORT}`)
 })

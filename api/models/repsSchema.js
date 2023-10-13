@@ -4,7 +4,7 @@ const repsSchema = new mongoose.Schema({
   name: String,
   location: String,
   email: String,
-  languages: String,
+  languages: [String],
   phone: Number,
 })
 

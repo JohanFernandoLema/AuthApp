@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom'
 import stores from './mock_data'
+import EmployeesList from '../components/EmployeesList'
 
 const StorePage = () => {
   const { storeId } = useParams()
@@ -29,7 +30,7 @@ const StorePage = () => {
         </ul>
       </div>
       <p>
-        Feel free to get further assistance by <button>Contact Us</button>
+        <EmployeesList />{' '}
       </p>
     </>
   )
