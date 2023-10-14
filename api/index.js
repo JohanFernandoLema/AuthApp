@@ -5,7 +5,7 @@ import dotenv from 'dotenv'
 
 import auth from './routes/auth.js'
 import salesReps from './routes/salesReps.js'
-
+import storesList from './routes/stores.js'
 dotenv.config()
 const app = express()
 const PORT = 7000
@@ -25,6 +25,7 @@ app.use(express.json())
 
 app.use('/auth', auth)
 app.use('/salesRepresentatives', salesReps)
+app.use('/stores', storesList)
 
 app.listen(PORT, () => {
   cloudDB()
