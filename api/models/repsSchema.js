@@ -1,5 +1,5 @@
 // const mongoose = require('mongoose')
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 const repsSchema = new mongoose.Schema({
   name: String,
   location: String,
@@ -9,4 +9,5 @@ const repsSchema = new mongoose.Schema({
 })
 
 const repsInfo = mongoose.model('reps', repsSchema)
-module.exports = repsInfo
+
+export default repsInfo

@@ -1,5 +1,5 @@
-const express = require('express')
-const Representative = require('../models/repsSchema.js')
+import express from 'express'
+import Representative from '../models/repsSchema.js'
 const router = express.Router()
 
 // CREATE A SALES REP
@@ -61,4 +61,5 @@ router.get('/', async (req, res) => {
     res.status(500).json('Representatives do not exist')
   }
 })
-module.exports = router
+
+export default router

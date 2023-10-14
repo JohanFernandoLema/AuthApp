@@ -1,10 +1,10 @@
 // FRAMEWORKS REQUIRED
-const express = require('express')
-const mongoose = require('mongoose')
-const dotenv = require('dotenv')
+import express from 'express'
+import mongoose from 'mongoose'
+import dotenv from 'dotenv'
 
-const authRoute = require('./routes/auth.js')
-const salesReps = require('./routes/salesReps.js')
+import auth from './routes/auth.js'
+import salesReps from './routes/salesReps.js'
 
 dotenv.config()
 const app = express()
@@ -23,7 +23,7 @@ const cloudDB = async () => {
 // middleware
 app.use(express.json())
 
-app.use('/auth', authRoute)
+app.use('/auth', auth)
 app.use('/salesRepresentatives', salesReps)
 
 app.listen(PORT, () => {
