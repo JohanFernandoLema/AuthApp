@@ -12,15 +12,13 @@ app.use(express.json())
 
 const dbConnection = async () => {
   try {
-    await mongoose.connect(`mongodb://127.0.0.1:27017/authenticationApp`)
-    console.log('Connection successfully towards your db')
+    await mongoose.connect(process.env.MONGO_URI)
+    console.log('Connection successfully towards the DB')
   } catch (error) {
     console.log(`Error: ${error.message}`)
   }
 }
-app.get('/', (req, res) => {
-  res.json({ message: 'Home Page Endpoint' })
-})
+
 app.listen(PORT, () => {
   dbConnection()
   console.log(`Server is running successfully on port: ${PORT}`)
