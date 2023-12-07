@@ -2,7 +2,7 @@ import User from '../models/userModel.js'
 
 // Register User
 const homePage = async (req, res) => {
-  const { email, password } = req.body
+  const { name, email, password } = req.body
 
   const validEmail = await User.findOne({ email })
 
@@ -11,7 +11,9 @@ const homePage = async (req, res) => {
   }
 
   const user = await User.create({
+    name: name,
     email: email,
+    password: password,
   })
 
   res.status(200).json(user)

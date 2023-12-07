@@ -3,6 +3,6 @@ import homePage from '../controllers/userControllers.js'
 
 const router = express.Router()
 
-router.get('/', homePage)
+router.post('/register', homePage)
 
 export default router
