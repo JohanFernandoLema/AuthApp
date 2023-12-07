@@ -1,17 +1,24 @@
 import User from '../models/userModel.js'
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 
 // Register User
 const registerUser = async (req, res) => {
   const { name, email, password } = req.body
 
   const validEmail = await User.findOne({ email })
+  const hashPassword = bcrypt.hashSync(password, 10)
 
   if (!validEmail) {
     const user = await User.create({
       name: name,
       email: email,
+      password: hashPassword,
     })
-    return res.status(200).json(user)
+    const token = jwt.sign({ email }, process.env.MY_SECRET, {
+      expiresIn: Math.floor(Date.now() / 1000) + 60 * 60,
+    })
+    return res.status(200).json({ user, token })
   } else {
     return res.status(401).json({ message: 'Log in using valid credentials' })
   }
