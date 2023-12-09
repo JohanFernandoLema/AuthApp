@@ -18,7 +18,16 @@ const registerUser = async (req, res) => {
     const token = jwt.sign({ email }, process.env.MY_SECRET, {
       expiresIn: Math.floor(Date.now() / 1000) + 60 * 60,
     })
-    return res.status(200).json({ user, token })
+
+    const protectToken = {
+      maxAge: Math.floor(Date.now() / 1000) + 60 * 60,
+      httpOnly: true,
+    }
+
+    return res
+      .status(200)
+      .cookie('jwt', token, protectToken)
+      .json({ user, token })
   } else {
     return res.status(401).json({ message: 'Log in using valid credentials' })
   }
@@ -29,16 +38,28 @@ const registerUser = async (req, res) => {
 const logIn = async (req, res) => {
   const { email, password } = req.body
 
-  const userExists = await User.findOne({ email })
+  if (!(email && password)) {
+    res
+      .status(404)
+      .json({ message: 'Request can not be complete "Fields missing"' })
+  }
 
-  if (userExists) {
-    res.status(200).json({
-      email: email,
+  const user = await User.findOne({ email })
+
+  if (user && (await bcrypt.compare(password, user.password))) {
+    const token = jwt.sign({ email }, process.env.MY_SECRET, {
+      expiresIn: '1h',
+    })
+
+    const protectToken = {
+      maxAge: Math.floor(Date.now() / 1000) + 60 * 60,
+      httpOnly: true,
+    }
+    res.status(200).cookie('jwt', token, protectToken).json({
+      user,
     })
   } else {
-    res
-      .status(401)
-      .json({ message: 'Please make sure you are using valid credentials' })
+    res.status(404).json({ message: 'Credentials are not valid' })
   }
 }
 
