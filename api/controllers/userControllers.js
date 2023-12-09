@@ -63,6 +63,12 @@ const logIn = async (req, res) => {
   }
 }
 
+// Log Out User
+
+const logOut = async (req, res) => {
+  res.status(200).json({ message: 'Log out user endpoint' })
+}
+
 // Delete User
 
 const deleteUser = async (req, res) => {
@@ -77,4 +83,4 @@ const userList = async (req, res) => {
   res.status(200).json(users)
 }
 
-export { registerUser, logIn, deleteUser, userList }
+export { registerUser, logIn, deleteUser, userList, logOut }
