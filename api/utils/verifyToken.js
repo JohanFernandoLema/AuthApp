@@ -7,7 +7,7 @@ const protect = async (req, res, next) => {
   if (token) {
     try {
       const decoded = jwt.verify(token, process.env.MY_SECRET)
-      req.user = await User.findById(decoded.email)
+      req.user = await User.findById(decoded.user._id)
 
       next()
     } catch (error) {
