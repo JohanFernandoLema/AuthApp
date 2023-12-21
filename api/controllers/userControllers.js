@@ -15,7 +15,7 @@ const registerUser = async (req, res) => {
       email: email,
       password: hashPassword,
     })
-    const token = jwt.sign({ email }, process.env.MY_SECRET, {
+    const token = jwt.sign({ user }, process.env.MY_SECRET, {
       expiresIn: Math.floor(Date.now() / 1000) + 60 * 60,
     })
 
@@ -47,7 +47,7 @@ const logIn = async (req, res) => {
   const user = await User.findOne({ email })
 
   if (user && (await bcrypt.compare(password, user.password))) {
-    const token = jwt.sign({ email }, process.env.MY_SECRET, {
+    const token = jwt.sign({ user }, process.env.MY_SECRET, {
       expiresIn: '1h',
     })
 
@@ -66,7 +66,11 @@ const logIn = async (req, res) => {
 // Log Out User
 
 const logOut = async (req, res) => {
-  res.status(200).json({ message: 'Log out user endpoint' })
+  res.cookie('jwt', '', {
+    httpOnly: true,
+    maxAge: new Date(0),
+  })
+  res.status(200).json({ message: 'You have finalized your session' })
 }
 
 // Delete User
@@ -83,4 +87,50 @@ const userList = async (req, res) => {
   res.status(200).json(users)
 }
 
-export { registerUser, logIn, deleteUser, userList, logOut }
+// Get User Profile
+
+const getUserProfile = async (req, res) => {
+  const user = {
+    _id: req.user._id,
+    name: req.user.name,
+    email: req.user.email,
+  }
+  res.status(200).json(user)
+}
+
+// Update User Profile
+
+const updateUserProfile = async (req, res) => {
+  const user = await User.findById(req.user._id)
+
+  if (user) {
+    user.name = req.body.name || user.name
+    user.email = req.body.email || user.email
+
+    if (req.body.password) {
+      user.password = req.body.password
+    }
+
+    const updatedUser = await user.save()
+
+    return res.status(200).json({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+    })
+  } else {
+    res.status(404).json({ message: 'User not found' })
+  }
+
+  res.status(200).json({ message: 'Update user profile endpoint' })
+}
+
+export {
+  registerUser,
+  logIn,
+  deleteUser,
+  userList,
+  logOut,
+  getUserProfile,
+  updateUserProfile,
+}
