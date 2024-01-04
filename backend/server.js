@@ -2,15 +2,18 @@ import express from 'express'
 import dotenv from 'dotenv'
 import userRoutes from './routes/userRoutes.js'
 dotenv.config()
+import { notFound, errorHandler } from './middlewares/errorMiddleware.js'
 
 const port = process.env.PORT || 5000
 
 const app = express()
 
-app.use('api/users', userRoutes)
+app.use('/api/users', userRoutes)
 
-app.use('/', (req, res) =>
+app.get('/', (req, res) =>
   res.status(200).json({ message: 'Server is working' })
 )
+app.use(notFound)
+app.use(errorHandler)
 
 app.listen(port, () => console.log(`Server is connected to port: ${port}`))
